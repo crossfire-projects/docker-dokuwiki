@@ -1,3 +1,10 @@
+# About this Fork
+
+This image was forked to create a Docker-based deployment for the Crossfire Wiki. While the original goal was to support
+that specific wiki, the changes introduced in this fork are general-purpose and not specific to Crossfire. They improve
+flexibility and maintain compatibility with the upstream DokuWiki image, making this version suitable for broader use
+cases beyond its initial intent.
+
 # DokuWiki Docker Image
 
 This image is based on the official [PHP Apache image](https://hub.docker.com/_/php) and provides a DokuWiki
