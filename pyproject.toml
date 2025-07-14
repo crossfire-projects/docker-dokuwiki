@@ -1,6 +1,6 @@
 [project]
 name = "dokuwiki"
-version = "2024.2.6b"
+version = "2025.05.14a"
 description = "Crossfire Dokuwiki."
 
 keywords = [
