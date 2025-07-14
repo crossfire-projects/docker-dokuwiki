@@ -1,7 +1,5 @@
 ARG UV_VERSION=latest
 ARG DEBIAN_VERSION=bookworm
-
-ARG UBUNTU_VERSION=noble
 ARG HADOLINT=v2.12.0
 
 FROM ghcr.io/astral-sh/uv:$UV_VERSION AS uv

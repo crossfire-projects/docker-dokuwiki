@@ -38,8 +38,5 @@
         "UV_PROJECT_ENVIRONMENT": "/workspace/.venv"
     },
     "postCreateCommand": "./.devcontainer/postCreateCommand.sh && uv run pre-commit install",
-    "remoteUser": "vscode",
-    "forwardPorts": [
-        8080
-    ]
+    "remoteUser": "vscode"
 }
