@@ -65,26 +65,9 @@ COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
 COPY --from=builder /usr/local/include/php /usr/local/include/php
 COPY --from=builder --chown=www-data:www-data /usr/src/dokuwiki/ /var/www/html
 
-
-# FROM php:8.3-apache AS dokuwiki-base
-
-# additional extensions can be passed as build-arg
-# ARG PHP_EXTENSIONS=""
-
-# COPY root/build-deps.sh /
-# RUN /bin/bash /build-deps.sh
-
-
-# FROM dokuwiki-base
-
-# ARG DOKUWIKI_VERSION=stable
-
 ENV PHP_UPLOADLIMIT=128M
 ENV PHP_MEMORYLIMIT=256M
 ENV PHP_TIMEZONE=America/Chicago
-
-# COPY root /
-# RUN /bin/bash /build-setup.sh
 
 COPY --chown=root:root root/etc/apache2 /etc/apache2/
 COPY --chown=root:root root/usr/local/etc/php /usr/local/etc/php/
@@ -113,11 +96,5 @@ RUN mkdir /storage \
 
 VOLUME /storage
 EXPOSE 8080
-
-# Moved to docker-compose.yml
-# HEALTHCHECK --timeout=5s \
-#     CMD curl --silent --fail-with-body http://localhost:8080/health.php || exit 1
-
-# RUN chmod +x /dokuwiki-entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/dokuwiki-entrypoint.sh"]

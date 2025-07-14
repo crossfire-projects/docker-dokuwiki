@@ -1,7 +1,8 @@
 services:
   dokuwiki:
-    image: crossfire-dokuwiki
-    container_name: dokuwiki
+    # image: basictheprogram/crossfire-dokuwiki:devel-2025.05.14a
+    image: dokuwiki-devel
+    container_name: crossfire-dokuwiki
     user: "0:0"
     restart: unless-stopped
 
@@ -59,3 +60,10 @@ networks:
     name: nexxus
     driver: bridge
     external: true
+
+# Testing change .env SYSLOG_ADDRESS="tcp://127.0.0.1:514"
+#
+# docker run -d \
+#   --name syslog-ng \
+#   -p 514:514 \
+#   balabit/syslog-ng
