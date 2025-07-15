@@ -1,7 +1,7 @@
 services:
   dokuwiki:
-    # image: basictheprogram/crossfire-dokuwiki:devel-2025.05.14a
-    image: dokuwiki-devel
+    image: basictheprogram/crossfire-dokuwiki:devel-2025.05.14a
+    # image: dokuwiki-devel
     container_name: crossfire-dokuwiki
     user: "0:0"
     restart: unless-stopped
