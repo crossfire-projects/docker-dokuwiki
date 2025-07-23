@@ -22,7 +22,7 @@ wheels = [
 
 [[package]]
 name = "dokuwiki"
-version = "2024.2.6b0"
+version = "2025.5.14a0"
 source = { editable = "." }
 
 [package.dev-dependencies]

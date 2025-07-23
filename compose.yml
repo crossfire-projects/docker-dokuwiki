@@ -1,24 +1,38 @@
 services:
   dokuwiki:
-    image: crossfire-dokuwiki
-    container_name: dokuwiki
+    image: basictheprogram/crossfire-dokuwiki:devel-2025.05.14a
+    # image: dokuwiki-devel
+    container_name: crossfire-dokuwiki
     user: "0:0"
     restart: unless-stopped
+
     environment:
       TZ: ${TZ}
       PHP_TIMEZONE: ${TZ}
       PHP_MEMORYLIMIT: ${PHP_MEMORYLIMIT}
       PHP_UPLOADLIMIT: ${PHP_UPLOADLIMIT}
+
     volumes:
       - ./storage:/storage
+
     healthcheck:
       test: ["CMD", "curl", "--silent", "--fail-with-body", "http://localhost:8080/health.php"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 10s
+
+    logging:
+      driver: syslog
+      options:
+        syslog-address: ${SYSLOG_ADDRESS}
+        syslog-format: "rfc5424"
+        tag: "{{.Name}}"
+        env: "HOSTNAME"
+
     ports:
       - "8080:8080"
+
     labels:
       - traefik.enable=true
       # Allow HTTP and HTTPS
@@ -37,6 +51,7 @@ services:
       - traefik.http.routers.dokuwiki-http-redir.middlewares=https-redirect@docker
       # Define the backend service
       - traefik.http.services.dokuwiki-service.loadbalancer.server.port=8080
+
     networks:
       - nexxus
 
@@ -45,3 +60,7 @@ networks:
     name: nexxus
     driver: bridge
     external: true
+
+# Testing change .env SYSLOG_ADDRESS="tcp://127.0.0.1:514"
+#
+# docker run -d --name syslog-ng -p 514:514 balabit/syslog-ng

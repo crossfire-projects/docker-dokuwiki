@@ -1,7 +1,7 @@
 FROM php:8.4-cli AS builder
 
 ENV DOKUWIKI_VERSION=stable
-ENV DOKUWIKI_SHA256=7ac919bc298c049af15764f3563ec3012cd158945ef2a22348684df701a19ba3
+ENV DOKUWIKI_SHA256=91e508832febe10c7317e484e946576692bf9181397f8dace1df006f8161176d
 ENV IMAGICK_VERSION=3.8.0
 ENV LIBLDAP=2.5-0
 
@@ -65,26 +65,9 @@ COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
 COPY --from=builder /usr/local/include/php /usr/local/include/php
 COPY --from=builder --chown=www-data:www-data /usr/src/dokuwiki/ /var/www/html
 
-
-# FROM php:8.3-apache AS dokuwiki-base
-
-# additional extensions can be passed as build-arg
-# ARG PHP_EXTENSIONS=""
-
-# COPY root/build-deps.sh /
-# RUN /bin/bash /build-deps.sh
-
-
-# FROM dokuwiki-base
-
-# ARG DOKUWIKI_VERSION=stable
-
 ENV PHP_UPLOADLIMIT=128M
 ENV PHP_MEMORYLIMIT=256M
 ENV PHP_TIMEZONE=America/Chicago
-
-# COPY root /
-# RUN /bin/bash /build-setup.sh
 
 COPY --chown=root:root root/etc/apache2 /etc/apache2/
 COPY --chown=root:root root/usr/local/etc/php /usr/local/etc/php/
@@ -113,11 +96,5 @@ RUN mkdir /storage \
 
 VOLUME /storage
 EXPOSE 8080
-
-# Moved to docker-compose.yml
-# HEALTHCHECK --timeout=5s \
-#     CMD curl --silent --fail-with-body http://localhost:8080/health.php || exit 1
-
-# RUN chmod +x /dokuwiki-entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/dokuwiki-entrypoint.sh"]
