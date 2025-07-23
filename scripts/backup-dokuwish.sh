@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # === Load .env if it exists ===
-# === Load .env if it exists ===
 ENV_FILE=".env"
 if [ -f "$ENV_FILE" ]; then
     set -a
     . "$ENV_FILE"
     set +a
 fi
+
 # === Configuration ===
 SOURCE_DIR="${SOURCE_DIR:-/path/to/your/dokuwiki}"
 DEST_DIR="/tmp/dokuwiki-backup"

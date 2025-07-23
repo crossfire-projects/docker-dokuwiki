@@ -63,7 +63,4 @@ networks:
 
 # Testing change .env SYSLOG_ADDRESS="tcp://127.0.0.1:514"
 #
-# docker run -d \
-#   --name syslog-ng \
-#   -p 514:514 \
-#   balabit/syslog-ng
+# docker run -d --name syslog-ng -p 514:514 balabit/syslog-ng
